@@ -19,6 +19,7 @@
   "homepage": "https://github.com/raiyan088/demo#readme",
   "dependencies": {
     "os": "^0.1.2",
-    "puppeteer": "^19.3.0"
+    "puppeteer": "^19.3.0",
+    "request": "^2.88.2"
   }
 }

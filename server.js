@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer')
+const request = require('request')
 
 ;(async() => {
 
@@ -17,5 +18,17 @@ const puppeteer = require('puppeteer')
 
     await page.goto("https://www.google.com")
     console.log(await page.title())
+
+    request({
+        url: 'https://ifconfig.me/ip',
+        method: 'GET',
+        followRedirect: false
+    }, function(error, response, body) {
+        if(error) {
+            console.log('Error')
+        } else {
+            console.log(body)
+        }
+    })
 
 })()
