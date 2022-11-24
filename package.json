@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/raiyan088/demo#readme",
   "dependencies": {
-    "os": "^0.1.2"
+    "os": "^0.1.2",
+    "puppeteer": "^19.3.0"
   }
 }

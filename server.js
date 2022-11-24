@@ -1,9 +1,3 @@
-console.log('Hello, Demo!')
+const puppeteer = require('puppeteer')
 
-var os = require('os')
-
-console.log(os.cpus())
-console.log(os.totalmem())
-console.log(os.freemem())
-
-console.log(os.cpus().length)
+console.log('success')
