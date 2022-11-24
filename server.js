@@ -18,9 +18,4 @@ const puppeteer = require('puppeteer')
     await page.goto("https://www.google.com")
     console.log(await page.title())
 
-    await page.close()
-    await browser.close()
-
-    console.log('Browser Close')
-
 })()
