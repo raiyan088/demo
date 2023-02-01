@@ -1,34 +1,38 @@
-const puppeteer = require('puppeteer')
+const express = require('express')
 const request = require('request')
 
-;(async() => {
 
-    console.log('Browser Open')
+const app = express()
 
-    let browser = await puppeteer.launch({
-        headless: true,
-        args: [ '--no-sandbox', '--disable-setuid-sandbox' ]
-    })
+app.use(express.json())
 
-    console.log('Page Open')
+app.listen(process.env.PORT || 3000, ()=>{
+    console.log("Listening on port 3000...")
+})
 
-    let page = await browser.newPage()
 
-    console.log('Page Load')
 
-    await page.goto("https://www.google.com")
-    console.log(await page.title())
-
+app.get('/ip', async function (req, res) {
     request({
         url: 'https://ifconfig.me/ip',
         method: 'GET',
         followRedirect: false
     }, function(error, response, body) {
         if(error) {
-            console.log('Error')
+            res.writeHeader(200, { "Content-Type": "text/html" })
+            res.write(error)
+            res.end()
         } else {
-            console.log(body)
+            res.writeHeader(200, { "Content-Type": "text/html" })
+            res.write(body)
+            res.end()
         }
     })
+})
 
-})()
+
+app.get('/', async function (req, res) {
+    res.writeHeader(200, { "Content-Type": "text/html" })
+    res.write('Invalid Request')
+    res.end()
+})
