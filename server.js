@@ -34,10 +34,7 @@ app.get('/ip', async function (req, res) {
 
 app.get('/puppeteer', async function (req, res) {
     if(browser == null) {
-        browser = await puppeteer.launch({
-            headless: true,
-            args: [ '--no-sandbox', '--disable-setuid-sandbox' ]
-        })
+        browser = await puppeteer.launch()
         res.writeHeader(200, { "Content-Type": "text/html" })
         res.write('Success')
         res.end()
