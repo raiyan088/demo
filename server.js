@@ -1,3 +1,4 @@
+const puppeteer = require('puppeteer')
 const express = require('express')
 const request = require('request')
 
