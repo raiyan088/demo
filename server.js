@@ -13,6 +13,25 @@ app.listen(process.env.PORT || 3000, ()=>{
 })
 
 
+startBrowser()
+
+async function startBrowser() {
+    try {
+        let browser = await puppeteer.launch({
+            headless: true,
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--ignore-certificate-errors',
+                '--ignore-certificate-errors-skip-list',
+                '--disable-dev-shm-usage'
+            ]
+        })
+        console.log('Browser Start')
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 app.get('/ip', async function (req, res) {
     request({
@@ -32,27 +51,6 @@ app.get('/ip', async function (req, res) {
     })
 })
 
-app.get('/puppeteer', async function (req, res) {
-     try {
-        startBrowser()
-    } catch (error) {
-        console.log(error)
-    }
-})
-
-startBrowser()
-
-async function startBrowser() {
-    try {
-        let browser = await puppeteer.launch({
-            headless: true,
-            args: ['--no-sandbox', '--disable-setuid-sandbox']
-        })
-        console.log('Browser Start')
-    } catch (error) {
-        console.log(error)
-    }
-}
 
 app.get('/', async function (req, res) {
     res.writeHeader(200, { "Content-Type": "text/html" })
