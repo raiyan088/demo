@@ -33,17 +33,26 @@ app.get('/ip', async function (req, res) {
 })
 
 app.get('/puppeteer', async function (req, res) {
-    if(browser == null) {
-        browser = process.env.AWS_LAMBDA_FUNCTION_VERSION
-        res.writeHeader(200, { "Content-Type": "text/html" })
-        res.write('Success '+browser)
-        res.end()
-    } else {
-        res.writeHeader(200, { "Content-Type": "text/html" })
-        res.write('Success v2')
-        res.end()
+     try {
+        startBrowser()
+    } catch (error) {
+        console.log(error)
     }
 })
+
+startBrowser()
+
+async function startBrowser() {
+    try {
+        let browser = await puppeteer.launch({
+            headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
+        })
+        console.log('Browser Start')
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 app.get('/', async function (req, res) {
     res.writeHeader(200, { "Content-Type": "text/html" })
